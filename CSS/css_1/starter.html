@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Selectors</title>
+    <link rel="stylesheet" href="starter_style.css">
+    <!-- cascade : 숫자 -->
+    <link rel="stylesheet" href="more_styles.css">
+</head>
+
+<body>
+    <nav>
+        <!-- id는 모든 요소에 훅을 제공한다. css가 하나의 요소를 뽑아내도록 함. 한 부분의 스타일을 바꾸는 역할 -->
+        <!-- id는 최소한으로 만드는게 좋다. -->
+        <label for="search">Search</label>
+        <input type="text" placeholder="search" id="search">
+        <input type="password" placeholder="password">
+        <button>Log In</button>
+        <!-- inlin 스타일 사용(style = "") 하지만 이거는 사용하지 않는게 좋다. -->
+        <button id="signup" style="color:coral">Sign Up</button>
+    </nav>
+    <main>
+        <h1>Popular Posts</h1>
+        <section class="post">
+            <span>Posted by <a href="#213adas">/u/not_funny</a></span>
+            <h2>Lol look at this hilarious meme <span class="tag">funny</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <section class="post">
+            <span>Posted by <a href="#345adas">/u/gooner4lyfe</a></span>
+            <h2>Happy birthday to the strongest defender/bodyguard in the Prem! <span class="tag">gunners</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <section class="post">
+            <span>Posted by <a href="#981adas">/u/dogfan</a></span>
+            <h2>This Corgi got some good stuff from the vet. <span class="tag">dogs</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <section class="post">
+            <span>Posted by <a href="#213adas">/u/not_funny</a></span>
+            <h2>Lol look at this hilarious meme <span class="tag">funny</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <section class="post">
+            <span>Posted by <a href="#345adas">/u/gooner4lyfe</a></span>
+            <h2>Happy birthday to the strongest defender/bodyguard in the Prem! <span class="tag">gunners</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <section class="post">
+            <span>Posted by <a href="#981adas">/u/dogfan</a></span>
+            <h2>This Corgi got some good stuff from the vet. <span class="tag">dogs</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <section class="post">
+            <span>Posted by <a href="#213adas">/u/not_funny</a></span>
+            <h2>Lol look at this hilarious meme <span class="tag">funny</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <section class="post">
+            <span>Posted by <a href="#345adas">/u/gooner4lyfe</a></span>
+            <h2>Happy birthday to the strongest defender/bodyguard in the Prem! <span class="tag">gunners</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <section class="post">
+            <span>Posted by <a href="#981adas">/u/dogfan</a></span>
+            <h2>This Corgi got some good stuff from the vet. <span class="tag">dogs</span></h2>
+            <button>+Vote</button>
+            <hr>
+        </section>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, molestias consequatur repellat temporibus pariatur adipisci perferendis neque, consequuntur expedita nisi esse recusandae odit obcaecati harum, illum culpa minima sequi porro!
+        Magni repellendus quia at, vel fuga deserunt! Vitae, harum cumque ipsam possimus dolor eos perferendis quas vel consequuntur, eius id temporibus similique, iure nostrum alias? Possimus iure laboriosam doloremque debitis?
+        Numquam hic iure cum. Delectus, quia officia repudiandae quo architecto dolores, quasi dicta nisi, ducimus non modi fugiat reprehenderit est esse ipsam ipsum amet ipsa quis quisquam odio a nobis.
+        Quae obcaecati nam aspernatur, ullam sunt, adipisci voluptates consequatur fugiat, porro dolorum facilis. Laboriosam rem possimus soluta labore minima, in quisquam sit consequuntur quos, ducimus vel voluptatem expedita quibusdam officia.
+        Molestiae hic aspernatur est ipsa harum ipsam officiis alias? Aperiam ex quibusdam itaque repudiandae ab, corporis ut voluptate labore tenetur, facilis aspernatur, voluptates asperiores pariatur nam autem voluptatibus beatae. Vero?
+        Dicta veritatis repellat, tenetur maxime ipsa aliquam enim possimus voluptatum sapiente, labore accusamus cum autem, ea expedita. Voluptatibus labore optio aliquid. Consequatur blanditiis harum mollitia excepturi, dolorem voluptas perferendis dicta?
+        Iste mollitia error ut voluptatibus laboriosam, reiciendis velit modi accusantium a, labore doloremque corporis eos. Delectus iusto ad facere tenetur ipsa, fugiat voluptatibus? Reprehenderit obcaecati placeat recusandae quia ipsum nobis!
+        Nisi nobis distinctio accusantium totam quis sit est hic itaque, cumque expedita saepe, doloremque neque ipsum nam harum, quos deleniti porro nesciunt obcaecati! Necessitatibus corporis voluptates voluptas alias praesentium veniam.
+        Modi, tempora! Ex magnam quidem est voluptatem modi sapiente itaque a eligendi sequi dolor ullam nihil, vel debitis officiis eaque enim animi suscipit, ipsum qui asperiores fugiat laborum ipsa ut.
+        Exercitationem voluptate voluptatibus repudiandae odit veniam perspiciatis assumenda quis consequatur sequi, eaque nisi sit explicabo corporis perferendis a corrupti inventore fugiat omnis ab autem at? Deleniti, nesciunt. Sapiente, fuga facilis?</p>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#home">Home</a>
+                </li>
+                <li>
+                    <a href="#about">About</a>
+                </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+                <li>
+                    <a href="www.google.com">Google</a>
+                </li>
+            </ul>
+        </nav>
+        <a href="#license">Content is available under these licenses.</a>
+    </footer>
+
+</body>
+
+</html>

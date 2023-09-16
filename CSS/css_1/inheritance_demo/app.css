@@ -1,0 +1,21 @@
+body{
+    color: purple;
+}
+
+h1{
+    color: blue;
+}
+
+section{
+    color: aqua;
+}
+
+form{
+    color: greenyellow;
+}
+
+/* 일부요소는 상속받지 않도록 기본설정이 되어있음. */
+/* 다음과 같이하면 상속받도록 설정 */
+button, input{
+    color: inherit; 
+}

@@ -1,0 +1,62 @@
+html{   /* 루트요소의 글꼴크기 변경 */
+    font-size: 30px;
+}
+
+section{
+    background-color: #6d6875;
+    width: 400px;
+    height: 800px;
+}
+
+div{
+    background-color: #e5989b;
+    width: 70%;    /* 부모 요소의 젊반*/
+    height: 20%;
+}
+
+h1{
+    font-size: 40px;
+    border:1px solid black;
+    line-height: 200%; /* 80px */
+}
+
+/* 1em = font-size of the parent */
+/* wem =  twice the font-size of the parent */
+#ems h2{
+    font-size: 2em; /* 부모 요소 : article */
+    margin-left: 1em;   /* 요소 자체의 정확한 글꼴 크기. font-size=40px 가 되었으니 margin은 40 px*/
+}
+#ems h3{
+    font-size: 1.5em;
+}
+#ems p{
+    font-size: 0.8em;
+}
+#ems {
+    font-size: 20px;
+}
+
+button{
+    font-size : 1em;    /* 부모요소가 20px임. 폰트사이즈 20px*/
+    padding: 0 1em;     /* 0, 20px */
+    border-radius: 0.5em;   /* 10px */
+    background-color: antiquewhite;
+}
+
+/* rem : 부모요소에 크기에 따라 바꾸지 않고 루트 html 요소의 글씨 크기에 따라 바꾼다 */
+#ems ul{
+    font-size: 1.5em;
+}
+
+#rems h2{
+    font-size: 3rem;
+}
+#rems h3{
+    font-size: 2rem;
+}
+#rems ul{
+    font-size: 0.8rem;
+}
+#rems button{
+    font-size: 1.5rem;
+}

@@ -1,0 +1,20 @@
+section{
+    width: 500px;
+    height: 500px;
+    background-color: rgb(193, 122, 193);
+}
+
+#rgba{
+    width: 50%;
+    height: 50%;
+    /* a(0~1): background에 적용 */
+    background-color: rgba(75, 123, 236, 0.671);
+}
+
+#opacity{
+    width: 50%;
+    height: 50%;
+    background-color: yellow;
+    /* opacity : 전체 요소에 적용 */
+    opacity: 0.3;
+}

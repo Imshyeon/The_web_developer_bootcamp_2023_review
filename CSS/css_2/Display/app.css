@@ -1,0 +1,38 @@
+/* h1{
+    background-color: palegoldenrod;
+    border: 1px solid black;
+    display: inline;
+}
+
+span{ 
+    background-color: paleturquoise;
+    border: 1px solid black;
+    display: block;
+} */
+
+span{
+    background-color: palevioletred;
+    border : 1px solid black;
+    width:500px; /* 요소가 인라인 디스플레이면 너비나 높이는 무시한다.*/
+    padding : 100px;
+    margin:50px;    /* 좌우만 적용, 상하는 적용되지 않는다. */
+}
+
+h1{
+    background-color: paleturquoise;
+    border : 1px solid black;
+    width:300px; 
+    /* height: 200px; */
+    padding: 50px;
+    margin: 100px;
+}
+
+div{
+    height: 200px;
+    width: 200px;
+    background-color: olive;
+    border:3px solid black;
+    display: inline-block; /* width, height, padding, margin적용됨*/
+    margin: 10px;
+    display: none; /* 요소 자체가 삭제되는 건 아님. 하지만 표시되지 않음.*/
+}
