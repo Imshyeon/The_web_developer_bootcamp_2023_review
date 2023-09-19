@@ -13,18 +13,61 @@ h1{
     margin: 0 auto;
     border: 5px solid #003049;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     /* flex-wrap: wrap-reverse; */
    /* align-items: baseline;  텍스트 기준으로 정렬*/
    align-items: flex-start;
    /* flex-wrap:wrap-reverse;  cross axis가 밑->위 */
-    flex-wrap: wrap-reverse; /* 줄바꿈 */
+    /* flex-wrap: wrap; 줄바꿈 */
+    /* align-content: center; */ /* flex-wrap 있어야지 적용이 됨. */
 }
 
 #container div{
     width: 200px;
     height: 200px;
+    /* max-width: 300px; */
     text-align: center;
     /* font-size: 4em; */
+    flex-basis: 800px; /* 요소가 배치될 때의 최초 크기 */
+    /* flex-grow: 1; */
+}
+/* 
+div:nth-of-type(3){
+    align-self: flex-end;
+}
+
+div:nth-of-type(2){
+    align-self: center;
+} */
+
+div:nth-of-type(1){
+    flex-grow: 1;
+    flex-shrink:3;
+}
+div:nth-of-type(5){
+    flex-grow: 2;
+    flex-shrink: 0;
+}
+
+
+/*==================================*/
+
+main{
+    width: 80%;
+    margin: 0 auto;
+    border: 5px solid black;
+    height: 500px;
+    display: flex;
+}
+
+main .sidebar{
+    background-color: blueviolet;
+    border: 2px solid white;
+    flex: 1 2 300px; /*flex-grow flex-shrink flex-basis(minimum)*/
+}
+
+main .maincontent{
+    background-color: gold;
+    flex: 2 1 600px;
 }
