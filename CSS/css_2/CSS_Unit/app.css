@@ -43,11 +43,11 @@ button{
     background-color: antiquewhite;
 }
 
-/* rem : 부모요소에 크기에 따라 바꾸지 않고 루트 html 요소의 글씨 크기에 따라 바꾼다 */
+
 #ems ul{
     font-size: 1.5em;
 }
-
+/* rem : 부모요소에 크기에 따라 바꾸지 않고 루트 html 요소의 글씨 크기에 따라 바꾼다 */
 #rems h2{
     font-size: 3rem;
 }

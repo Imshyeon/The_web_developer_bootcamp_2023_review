@@ -34,5 +34,5 @@ div{
     border:3px solid black;
     display: inline-block; /* width, height, padding, margin적용됨*/
     margin: 10px;
-    display: none; /* 요소 자체가 삭제되는 건 아님. 하지만 표시되지 않음.*/
+    display: none; /* 요소 자체가 삭제되는 건 아님. 하지만 표시되지 않음. */
 }

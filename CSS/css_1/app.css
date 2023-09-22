@@ -3,8 +3,8 @@ h1{
     font-weight: normal;  
     text-decoration: underline;
     text-decoration-color: orange;
-    text-decoration-style: wavy;
-    letter-spacing: 15px;
+    text-decoration-style:dotted;
+    letter-spacing: 10px;
     font-size: 70px;
     /* 만약 해당 컴퓨터에서 지원하지 않는 폰트라면 다른 백업 옵션을 , 뒤에 적는다.. */
     /* font-family: 'Segoe UI', fantasy, Arial, sans-serif; */
