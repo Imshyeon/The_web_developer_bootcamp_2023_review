@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Review</title>
+</head>
+
+<body>
+    <form>
+        <ul>
+            <li>
+                <label for="r-name">이름</label>
+                <input type="text" id="r-name">
+            </li>
+            <li>
+                <label for="r-phone">전화</label>
+                <input type="text" id="r-phone">
+            </li>
+            <li>
+                <label for="email">이메일</label>
+                <input type="email" id="email">
+            </li>
+            <li>
+                <input type="submit" value="예약하기">
+            </li>
+        </ul>
+    </form>
+
+    <hr>
+
+    <h1>프런트엔드 개발자 지원서</h1>
+    <p>HTML, CSS, 자바스크립트의 기술을 이해하고 실무 경험이 있는 분을 찾습니다.</p>
+    <form>
+        <section>
+            <p><b>개인 정보</b></p>
+            <label for="username">이름</label>
+            <input type="text" id="username" placeholder="공백없이 입력하세요">
+            <br>
+            <label for="phone">연락처</label>
+            <input type="text" id="phone">
+        </section>
+        <section>
+            <p><b>지원 분야</b></p>
+            <div>
+                <input type="radio" name="part" value="web-publishing">
+                <label for="web-publishing">웹 퍼블리싱</label><br>
+                <input type="radio" name="part" value="web-application">
+                <label for="web-application">웹 어플리케이션 개발</label><br>
+                <input type="radio" name="part" value="dev-tool">
+                <label for="dev-tool">개발 환경 개선</label>
+            </div>
+        </section>
+        <section>
+            <label for="reason"><b>지원 동기</b></label>
+            <div>
+                <textarea id="why" placeholder="본사 지원 동기를 간략히 써주세요." cols="60" rows="5"></textarea>
+            </div>
+        </section>
+        <button type="submit">접수하기</button>
+        <button type="submit">다시쓰기</button>
+    </form>
+</body>
+
+</html>
