@@ -2,16 +2,18 @@ const p1 = {
     score : 0,
     button : document.querySelector('#p1Button'),
     display : document.querySelector('#p1Display'),
+    playerName : document.querySelector('#playerName1')
 }
 const p2 = {
     score : 0,
     button : document.querySelector('#p2Button'),
     display : document.querySelector('#p2Display'),
+    playerName : document.querySelector('#playerName2')
 }
 
 const resetButton = document.querySelector('#Reset');
 const winningScoreSelect = document.querySelector('#playto')
-
+const recordList = document.querySelector('#recordList')
 let winningScore = 3;
 let isGameOver = false;
 
@@ -52,4 +54,7 @@ function reset(){
         p.display.classList.remove('has-text-success', 'has-text-danger')
         p.button.disabled = false
     }
+    newLI = document.createElement('li')
+    newLI.append(`${p1.playerName} - ${p1.score} : ${p2.playerName} - ${b2.score}`)
+    recordList.append(newLI)
 }
