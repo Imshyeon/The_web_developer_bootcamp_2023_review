@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 app.use(express.urlencoded({ extended : true }))    // post - req.body
+app.use(express.json())
 
 app.get('/tacos',(req,res)=>{
     res.send('GET /tacos response')
