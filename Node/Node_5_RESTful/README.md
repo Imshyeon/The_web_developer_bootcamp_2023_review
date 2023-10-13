@@ -23,3 +23,14 @@
 </body>
 ```
 url에 `/tacos` 이렇게 나온다. 
+
+
+# RESTfull
+1. Index - /comments - GET &rarr; list all comments
+2. New - /comments/new - GET &rarr; Form to create new comment
+3. Create - /comments - POST  &rarr; Create a new comment
+4. Show - comments/:id - GET &rarr; Details for one specific comment
+5. Edit - /comments/:id/edit - GET &rarr; Form to edit specific comment
+6. Update - /comments/:id - PATCH  &rarr; Update one comment
+7. Destroy - /comments/:id - DELETE &rarr; Destroy one comment
+

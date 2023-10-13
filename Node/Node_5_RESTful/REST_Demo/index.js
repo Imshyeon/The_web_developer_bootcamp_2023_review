@@ -1,18 +1,101 @@
 const express = require('express');
 const app = express();
+const path = require('path');
+const { v4: uuid } = require('uuid');
+uuid();
+const methodOverride = require('method-override') // npm i method-override
 
-app.use(express.urlencoded({ extended : true }))    // post - req.body
-app.use(express.json())
+app.use(express.urlencoded({ extended: true }))    // post - req.body
+app.use(express.json()) // json으로 넘어오는 데이터 처리
+app.use(methodOverride('_method'))
 
-app.get('/tacos',(req,res)=>{
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views'))
+
+app.get('/tacos', (req, res) => {
     res.send('GET /tacos response')
 })
 
-app.post('/tacos',(req,res)=>{
-    const {meat, qty} = req.body   // { meat: 'pork', qty: '1' }
+app.post('/tacos', (req, res) => {
+    const { meat, qty } = req.body   // { meat: 'pork', qty: '1' }
     res.send(`OK, here are your ${qty} ${meat} taco`)
 })
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log('ON PORT 3000')
+})
+
+//======================= RESTful =======================
+
+let comments = [
+    {
+        id: uuid(),
+        username: 'Todd',
+        comment: 'lol that is so funny!'
+    },
+    {
+        id: uuid(),
+        username: 'Skyler',
+        comment: 'I like to go birdwatching with my dog'
+    },
+    {
+        id: uuid(),
+        username: 'Sk8erBoi',
+        comment: 'Plz delete your account, Todd'
+    },
+    {
+        id: uuid(),
+        username: 'onlysayswoof',
+        comment: 'woof woof woof'
+    }
+]
+
+//--------------------- READ ------------------------
+
+app.get('/comments', (req, res) => {
+    res.render('comments/index', { comments })
+})
+
+//--------------------- CREATE ------------------------
+
+app.get('/comments/new', (req, res) => {
+    res.render('comments/new')
+})
+
+app.post('/comments', (req, res) => {
+    const { username, comment } = req.body
+    comments.push({ username, comment, id : uuid() })
+    res.redirect('/comments')
+})
+
+//--------------------- SHOW - specific ------------------------
+app.get('/comments/:id', (req, res) => {
+    const { id } = req.params
+    const comment = comments.find(c => c.id === id)
+    res.render('comments/show', { comment })
+})
+
+//--------------------- UPDATE ------------------------
+
+app.get('/comments/:id/edit', (req,res)=>{
+    const { id } = req.params
+    const comment = comments.find(c => c.id === id)
+    res.render('comments/edit', { comment })
+})
+
+// PUT 요청은 전체를 업데이트
+// PATCH 요청은 부분 수정
+app.patch('/comments/:id', (req,res)=>{
+    const { id } = req.params
+    const newCommentText = req.body.comment
+    const foundComment = comments.find(c => c.id === id)
+    foundComment.comment = newCommentText
+    res.redirect('/comments')
+})
+
+//--------------------- DELETE ------------------------
+app.delete('/comments/:id', (req, res)=>{
+    const { id } = req.params
+    comments = comments.filter(c => c.id !== id)
+    res.redirect('/comments')
 })
