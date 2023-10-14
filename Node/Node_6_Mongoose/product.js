@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
-        min: 0,
+        min: [0, 'Price must be positive!!'],   // minValue, Error Msg
     },
     onSale: {
         type: Boolean,
@@ -38,18 +38,39 @@ const productSchema = new mongoose.Schema({
             type: Number,
             default: 0
         }
+    },
+    size:{
+        type: String,
+        enum: ['S','M','L','XL']
     }
 })
 
+//================== instance method ==================
+productSchema.methods.greet = function(){
+    console.log('HELLLLO!')
+}
+// node -> .load product.js -> const p = new Product({name:'bike bag', price:10})
+// p.greet() => 결과 : HELLLLO!
+
 const Product = mongoose.model('Product', productSchema);
+
+const findProduct = async ()=>{
+    const foundProduct = await Product.findOne({name:'Bike Helmet'})
+    foundProduct.greet();
+}
+
+findProduct(); // HELLLLO!
+
+
 // const bike = new Product({
-//     name: 'Tire Pump',
-//     price: 20.50,  // '599'도 가능
+//     name: 'Cycling Jersey',
+//     price: 28.50,  // '599'도 가능
 //     categories: ['Cycling'],
 //     qty:{
 //         online: 20,
 //         inStore: 5
-//     }
+//     },
+//     size: 'XS'  // size: `XS` is not a valid enum value for path `size`
 // })
 
 // bike.save()
@@ -63,15 +84,15 @@ const Product = mongoose.model('Product', productSchema);
 //         console.log(err)
 //     })
 
-Product.findOneAndUpdate({ name: 'Tire Pump' }, { price: -100 }, { new: true, runValidators: true })
-    .then(data => {
-        console.log('IT WORKED')
-        console.log(data)
-    })
-    .catch(err => {
-        console.log('ERROR')
-        // console.log(err.errors.name.properties.message)
-        console.log(err)
-    })
+// Product.findOneAndUpdate({ name: 'Tire Pump' }, { price: 20 }, { new: true, runValidators: true })
+//     .then(data => {
+//         console.log('IT WORKED')
+//         console.log(data)
+//     })
+//     .catch(err => {
+//         console.log('ERROR')
+//         // console.log(err.errors.name.properties.message)
+//         console.log(err)
+//     })
 
 
