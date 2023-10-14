@@ -58,12 +58,19 @@ productSchema.methods.toggleOnSale = function(){
     return this.save();
 }
 
+productSchema.methods.addCategory = function(newCat){
+    this.categories.push(newCat);
+    return this.save();
+}
+
 const Product = mongoose.model('Product', productSchema);
 
 const findProduct = async ()=>{
     const foundProduct = await Product.findOne({name:'Bike Helmet'});
     console.log(foundProduct)
     await foundProduct.toggleOnSale()
+    console.log(foundProduct)
+    await foundProduct.addCategory('Outdoors');
     console.log(foundProduct)
     foundProduct.greet();
 }
@@ -73,6 +80,7 @@ findProduct();
 // 2. HELLLLO!
 // - from Bike Helmet
 // 3. onsale : false -> true
+// 4. categories : ['cycling'] -> ['cycling', 'Outdoors'] 
 
 
 // const bike = new Product({
