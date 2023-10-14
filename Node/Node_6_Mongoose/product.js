@@ -18,8 +18,8 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        required : true,
-        min : 0,
+        required: true,
+        min: 0,
     },
     onSale: {
         type: Boolean,
@@ -29,8 +29,8 @@ const productSchema = new mongoose.Schema({
         type: [String],
         default: ['cycling']
     },
-    qty:{
-        online:{
+    qty: {
+        online: {
             type: Number,
             default: 0
         },
@@ -42,17 +42,28 @@ const productSchema = new mongoose.Schema({
 })
 
 const Product = mongoose.model('Product', productSchema);
-const bike = new Product({
-    name: 'Tire Pump',
-    price: 20.50,  // '599'도 가능
-    categories: ['Cycling'],
-    qty:{
-        online: 20,
-        inStore: 5
-    }
-})
+// const bike = new Product({
+//     name: 'Tire Pump',
+//     price: 20.50,  // '599'도 가능
+//     categories: ['Cycling'],
+//     qty:{
+//         online: 20,
+//         inStore: 5
+//     }
+// })
 
-bike.save()
+// bike.save()
+//     .then(data => {
+//         console.log('IT WORKED')
+//         console.log(data)
+//     })
+//     .catch(err => {
+//         console.log('ERROR')
+//         // console.log(err.errors.name.properties.message)
+//         console.log(err)
+//     })
+
+Product.findOneAndUpdate({ name: 'Tire Pump' }, { price: -100 }, { new: true, runValidators: true })
     .then(data => {
         console.log('IT WORKED')
         console.log(data)
@@ -62,3 +73,5 @@ bike.save()
         // console.log(err.errors.name.properties.message)
         console.log(err)
     })
+
+
