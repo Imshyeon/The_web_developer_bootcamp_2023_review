@@ -39,34 +39,45 @@ const productSchema = new mongoose.Schema({
             default: 0
         }
     },
-    size:{
+    size: {
         type: String,
-        enum: ['S','M','L','XL']
+        enum: ['S', 'M', 'L', 'XL']
     }
 })
 
 //================== instance method ==================
-productSchema.methods.greet = function(){
+productSchema.methods.greet = function () {
     console.log('HELLLLO!')
     console.log(`- from ${this.name}`)  // this = foundProduct
 }
 // node -> .load product.js -> const p = new Product({name:'bike bag', price:10})
 // p.greet() => 결과 : HELLLLO!
 
-productSchema.methods.toggleOnSale = function(){
+productSchema.methods.toggleOnSale = function () {
     this.onSale = !this.onSale;;
     return this.save();
 }
 
-productSchema.methods.addCategory = function(newCat){
+productSchema.methods.addCategory = function (newCat) {
     this.categories.push(newCat);
     return this.save();
 }
+//=====================================================
+
+
+//=================== static method ===================
+// this가 Product 모델 클래스 자체를 가리키게 됨. 위의 instance와는 다르다..
+// instance에서는 this가 인스턴스인 foundProduct를 가리킴.
+productSchema.statics.fireSale = function () {
+    return this.updateMany({}, { onSale: true, price: 0 })
+}
+//=====================================================
+
 
 const Product = mongoose.model('Product', productSchema);
 
-const findProduct = async ()=>{
-    const foundProduct = await Product.findOne({name:'Bike Helmet'});
+const findProduct = async () => {
+    const foundProduct = await Product.findOne({ name: 'Bike Helmet' });
     console.log(foundProduct)
     await foundProduct.toggleOnSale()
     console.log(foundProduct)
@@ -75,7 +86,10 @@ const findProduct = async ()=>{
     foundProduct.greet();
 }
 
-findProduct(); 
+Product.fireSale().then(res => console.log(res))
+// 1. price : 0 & onSale : true
+
+findProduct();
 // 1. HELLLLO!
 // 2. HELLLLO!
 // - from Bike Helmet
