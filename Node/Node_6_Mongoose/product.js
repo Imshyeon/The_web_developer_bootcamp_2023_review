@@ -48,6 +48,7 @@ const productSchema = new mongoose.Schema({
 //================== instance method ==================
 productSchema.methods.greet = function(){
     console.log('HELLLLO!')
+    console.log(`- from ${this.name}`)  // this = foundProduct
 }
 // node -> .load product.js -> const p = new Product({name:'bike bag', price:10})
 // p.greet() => 결과 : HELLLLO!
@@ -59,7 +60,10 @@ const findProduct = async ()=>{
     foundProduct.greet();
 }
 
-findProduct(); // HELLLLO!
+findProduct(); 
+// 1. HELLLLO!
+// 2. HELLLLO!
+// - from Bike Helmet
 
 
 // const bike = new Product({
