@@ -46,6 +46,8 @@ const productSchema = new mongoose.Schema({
 })
 
 //================== instance method ==================
+// => 하나의 Product에 호출.
+
 productSchema.methods.greet = function () {
     console.log('HELLLLO!')
     console.log(`- from ${this.name}`)  // this = foundProduct
@@ -68,6 +70,9 @@ productSchema.methods.addCategory = function (newCat) {
 //=================== static method ===================
 // this가 Product 모델 클래스 자체를 가리키게 됨. 위의 instance와는 다르다..
 // instance에서는 this가 인스턴스인 foundProduct를 가리킴.
+// static method는 전체적인 Product 모델과 관련됨
+//=> 모델의 정적 메서드는 항목을 찾거나 업데이트하거나 생성하고 삭제할 수 있어서 편하고 유용하다
+
 productSchema.statics.fireSale = function () {
     return this.updateMany({}, { onSale: true, price: 0 })
 }
