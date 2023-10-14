@@ -53,10 +53,18 @@ productSchema.methods.greet = function(){
 // node -> .load product.js -> const p = new Product({name:'bike bag', price:10})
 // p.greet() => 결과 : HELLLLO!
 
+productSchema.methods.toggleOnSale = function(){
+    this.onSale = !this.onSale;;
+    return this.save();
+}
+
 const Product = mongoose.model('Product', productSchema);
 
 const findProduct = async ()=>{
-    const foundProduct = await Product.findOne({name:'Bike Helmet'})
+    const foundProduct = await Product.findOne({name:'Bike Helmet'});
+    console.log(foundProduct)
+    await foundProduct.toggleOnSale()
+    console.log(foundProduct)
     foundProduct.greet();
 }
 
@@ -64,6 +72,7 @@ findProduct();
 // 1. HELLLLO!
 // 2. HELLLLO!
 // - from Bike Helmet
+// 3. onsale : false -> true
 
 
 // const bike = new Product({
