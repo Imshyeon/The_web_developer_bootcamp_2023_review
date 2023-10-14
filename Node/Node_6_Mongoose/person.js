@@ -12,7 +12,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/shopApp')
 
 const personSchema = new mongoose.Schema({
     first: String,
-    last : String,
+    last: String,
 })
 
 //===================== getter =====================
@@ -33,16 +33,15 @@ const personSchema = new mongoose.Schema({
 
 //===================== setter =====================
 personSchema.virtual('fullName')
-.get(function(){
-    return `${this.first} ${this.last}` // this = instance 참조
-})
-.set(function(v){
-    const firstName = v.substring(0, v.indexOf(' '));
-    const lastName = v.substring(v.indexOf(' ') + 1);
-    this.set({first: firstName, last: lastName})
-})
+    .get(function () {
+        return `${this.first} ${this.last}` // this = instance 참조
+    })
+    .set(function (v) {
+        const firstName = v.substring(0, v.indexOf(' '));
+        const lastName = v.substring(v.indexOf(' ') + 1);
+        this.set({ first: firstName, last: lastName })
+    })
 
-const Person = mongoose.model('Person', personSchema)
 
 // > const Brad = new Person({first:'Brad', last:'Pitt'})
 // undefined
@@ -58,3 +57,39 @@ const Person = mongoose.model('Person', personSchema)
 // 'Brad Kang'
 // > Brad.fullName
 // 'Brad Kang'
+
+
+//===================== middelware =====================
+personSchema.pre('save', async function(){
+    this.first = 'YO'
+    this.last = 'AY'
+    console.log('ABOUT TO SAVE')
+})
+personSchema.post('save', async function(){
+    console.log('JUST SAVE')
+})
+
+//1. 
+// > const k = new Person({first:'zoe', last:'kang'})
+// undefined
+// > k.save()
+// Promise {
+//   <pending>,
+//   [Symbol(async_id_symbol)]: 654,
+//   [Symbol(trigger_async_id_symbol)]: 6
+// }
+// > ABOUT TO SAVE
+// JUST SAVE
+
+// (To exit, press Ctrl+C again or Ctrl+D or type .exit)
+// > k
+// {
+//   first: 'YO',
+//   last: 'AY',
+//   _id: new ObjectId("652a4a470489ab1846496211"),
+//   __v: 0
+// }
+
+
+
+const Person = mongoose.model('Person', personSchema)
