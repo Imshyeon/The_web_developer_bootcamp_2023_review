@@ -31,15 +31,26 @@ app.use('/dogs', (req, res, next) => {
     next()
 })// dogs로 오는 요청만..!
 
-app.use((req, res, next) => {
+
+// 1번
+// app.use((req, res, next) => {
+//     const { password } = req.query
+//     if (password === 'chicken') {
+//         next()
+//     }
+//     res.send('SORRY YOU NEED A PASSWORD')
+// })  
+// /dogs => SORRY YOU NEED A PASSWORD
+// /dogs?password=chicken => WOof
+
+// 2번
+const verifyPassword = (req, res, next) => {
     const { password } = req.query
     if (password === 'chicken') {
         next()
     }
     res.send('SORRY YOU NEED A PASSWORD')
-})  
-// /dogs => SORRY YOU NEED A PASSWORD
-// /dogs?password=chicken => WOof
+}
 
 app.get('/', (req, res) => {
     console.log(`REQUEST DATE: ${req.requestTime}`)
@@ -51,7 +62,8 @@ app.get('/dogs', (req, res) => {
     res.send('WOof')
 })
 
-app.get('/secret', (req, res)=>{
+// 이렇게 하면 /secret을 제외한 라우트는 그냥 실행되지만 /secret은 password가 있어야 보인다.
+app.get('/secret', verifyPassword, (req, res)=>{
     res.send('My Secret is: Sometimes I wear headphones in public.')
 })
 //http://localhost:3000/secret?password=chicken => res.send()내용이 나옴
