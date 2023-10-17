@@ -18,7 +18,7 @@ app.use(morgan('dev')) // tiny, dev, common
 //     return next()
 // })
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
     // req.method = 'GET'; //요청을 post로 보내면 요청 자체는 post, express에서는 get.... 
     // 자주하지 않는다.
     req.requestTime = Date.now()
@@ -26,26 +26,41 @@ app.use((req,res,next)=>{
     next()
 })
 
-app.use('/dogs',(req,res,next)=>{
+app.use('/dogs', (req, res, next) => {
     console.log('I LOVE DOG')
     next()
 })// dogs로 오는 요청만..!
 
-app.get('/', (req,res)=>{
+app.use((req, res, next) => {
+    const { password } = req.query
+    if (password === 'chicken') {
+        next()
+    }
+    res.send('SORRY YOU NEED A PASSWORD')
+})  
+// /dogs => SORRY YOU NEED A PASSWORD
+// /dogs?password=chicken => WOof
+
+app.get('/', (req, res) => {
     console.log(`REQUEST DATE: ${req.requestTime}`)
     res.send('Home Page')
 })
 
-app.get('/dogs', (req,res)=>{
+app.get('/dogs', (req, res) => {
     console.log(`REQUEST DATE: ${req.requestTime}`)
     res.send('WOof')
 })
 
-app.use((req,res)=>{
+app.get('/secret', (req, res)=>{
+    res.send('My Secret is: Sometimes I wear headphones in public.')
+})
+//http://localhost:3000/secret?password=chicken => res.send()내용이 나옴
+
+app.use((req, res) => {
     // res.send('NOT FOUND') // 1.
     res.status(404).send('NOT FOUND')
 }) // 404 에러 시 실행.. 위의 것 중 어느 것이랑도 매칭이 되지 않음..
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log('App is running on localhost:3000')
 })
