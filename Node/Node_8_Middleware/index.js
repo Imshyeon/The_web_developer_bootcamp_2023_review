@@ -18,13 +18,6 @@ app.use(morgan('dev')) // tiny, dev, common
 //     return next()
 // })
 
-
-
-app.get('/', (req,res)=>{
-    console.log(`REQUEST DATE: ${req.requestTime}`)
-    res.send('Home Page')
-})
-
 app.use((req,res,next)=>{
     // req.method = 'GET'; //요청을 post로 보내면 요청 자체는 post, express에서는 get.... 
     // 자주하지 않는다.
@@ -32,12 +25,26 @@ app.use((req,res,next)=>{
     console.log(req.method, req.path)
     next()
 })
-// '/'을 실행하면 Undefined, '/dogs'를 실행하면 date가 나옴.
+
+app.use('/dogs',(req,res,next)=>{
+    console.log('I LOVE DOG')
+    next()
+})// dogs로 오는 요청만..!
+
+app.get('/', (req,res)=>{
+    console.log(`REQUEST DATE: ${req.requestTime}`)
+    res.send('Home Page')
+})
 
 app.get('/dogs', (req,res)=>{
     console.log(`REQUEST DATE: ${req.requestTime}`)
     res.send('WOof')
 })
+
+app.use((req,res)=>{
+    // res.send('NOT FOUND') // 1.
+    res.status(404).send('NOT FOUND')
+}) // 404 에러 시 실행.. 위의 것 중 어느 것이랑도 매칭이 되지 않음..
 
 app.listen(3000,()=>{
     console.log('App is running on localhost:3000')
