@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 
+const AppError = require('./AppError')
+
 app.use(morgan('dev')) // tiny, dev, common
 // app.use((req, res, next)=>{
 //     console.log('this is my first middleware')
@@ -49,8 +51,9 @@ const verifyPassword = (req, res, next) => {
     if (password === 'chicken') {
         next()
     }
+    throw new AppError('password required', 401)
     // res.send('SORRY YOU NEED A PASSWORD')
-    throw new Error('Password required')
+    // throw new AppError(401,'Password required')
 }
 
 app.get('/', (req, res) => {
@@ -73,6 +76,10 @@ app.get('/secret', verifyPassword, (req, res)=>{
 })
 //http://localhost:3000/secret?password=chicken => res.send()내용이 나옴
 
+app.get('/admin',(req, res)=>{
+    throw new AppError('YOu are not an Admin', 403)
+})
+
 app.use((req, res) => {
     // res.send('NOT FOUND') // 1.
     res.status(404).send('NOT FOUND')
@@ -80,13 +87,21 @@ app.use((req, res) => {
 
 
 // 에러 핸들링 미들웨어
+// app.use((err, req, res, next)=>{
+//     console.log('*************************************')
+//     console.log('*****************ERROR***************')
+//     console.log('*************************************')
+//     // res.status(500).send('OH boy, we got the error')
+//     next(err)
+// })
+
 app.use((err, req, res, next)=>{
-    console.log('*************************************')
-    console.log('*****************ERROR***************')
-    console.log('*************************************')
-    // res.status(500).send('OH boy, we got the error')
-    next(err)
+    const {status = 500, message = 'Something went wrong'} = err; // 값이 없으면 디폴트로 수행.
+    res.status(status).send(message)   // err.stack 대신 해당 문장 수행..
 })
+// status
+// 1. 401 : 클라이언트가 누군지 모르지만 작업할 권한이 없다.
+// 2. 403 : 클라이언트가 누군지 알지만 권한이 없다.
 
 app.listen(3000, () => {
     console.log('App is running on localhost:3000')
