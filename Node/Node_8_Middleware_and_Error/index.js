@@ -49,12 +49,17 @@ const verifyPassword = (req, res, next) => {
     if (password === 'chicken') {
         next()
     }
-    res.send('SORRY YOU NEED A PASSWORD')
+    // res.send('SORRY YOU NEED A PASSWORD')
+    throw new Error('Password required')
 }
 
 app.get('/', (req, res) => {
     console.log(`REQUEST DATE: ${req.requestTime}`)
     res.send('Home Page')
+})
+
+app.get('/error',(req,res)=>{
+    chicken.fly()
 })
 
 app.get('/dogs', (req, res) => {
@@ -72,6 +77,16 @@ app.use((req, res) => {
     // res.send('NOT FOUND') // 1.
     res.status(404).send('NOT FOUND')
 }) // 404 에러 시 실행.. 위의 것 중 어느 것이랑도 매칭이 되지 않음..
+
+
+// 에러 핸들링 미들웨어
+app.use((err, req, res, next)=>{
+    console.log('*************************************')
+    console.log('*****************ERROR***************')
+    console.log('*************************************')
+    // res.status(500).send('OH boy, we got the error')
+    next(err)
+})
 
 app.listen(3000, () => {
     console.log('App is running on localhost:3000')
