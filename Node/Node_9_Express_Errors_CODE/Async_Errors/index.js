@@ -26,9 +26,11 @@ app.use(methodOverride('_method'))
 
 const categories = ['fruit', 'vegetable', 'dairy'];
 
+// 여기서 try ~ catch가 실행.    
 function wrapAsync(fn) {
     return function (req, res, next) {
-        fn(req, res, next).catch(e => next(e))
+        fn(req, res, next)
+            .catch(e => next(e))
     }
 }
 
@@ -47,17 +49,11 @@ app.get('/products/new', (req, res) => {
     res.render('products/new', { categories })
 })
 
-app.post('/products', async (req, res, next) => {
-    try{
-        const newProduct = new Product(req.body);
-        await newProduct.save();
-        res.redirect(`/products/${newProduct._id}`)
-    } catch(e){
-        next(e)
-    }
-})
-
-
+app.post('/products', wrapAsync(async (req, res, next) => {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    res.redirect(`/products/${newProduct._id}`)
+}))
 
 app.get('/products/:id', wrapAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -77,15 +73,11 @@ app.get('/products/:id/edit', wrapAsync(async (req, res, next) => {
     res.render('products/edit', { product, categories })
 }))
 
-app.put('/products/:id', async (req, res, next) => {
-    try{
-        const { id } = req.params;
-        const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
-        res.redirect(`/products/${product._id}`);
-    } catch(e){
-        next(e)
-    }
-})
+app.put('/products/:id', wrapAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
+    res.redirect(`/products/${product._id}`);
+}))
 
 app.delete('/products/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
@@ -93,17 +85,15 @@ app.delete('/products/:id', wrapAsync(async (req, res) => {
     res.redirect('/products');
 }));
 
-const handleValidationErr = err => {
-    console.dir(err);
-    //In a real app, we would do a lot more here...
-    return new AppError(`Validation Failed...${err.message}`, 400)
+const handleValidationErr = err =>{
+    console.dir(err)
+    return new AppError(`Validation Failed...${err.message}`, 400) // bad request
 }
 
-app.use((err, req, res, next) => {
-    console.log(err.name);
-    //We can single out particular types of Mongoose Errors:
+app.use((err, req, res, next)=>{
+    console.log(err.name)
     if (err.name === 'ValidationError') err = handleValidationErr(err)
-    next(err);
+    next(err)
 })
 
 app.use((err, req, res, next) => {
