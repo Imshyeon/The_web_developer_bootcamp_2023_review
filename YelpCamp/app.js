@@ -6,6 +6,7 @@ const methodOverride = require('method-override')
 const ejsMate = require('ejs-mate')
 
 const catchAsync = require('./utils/catchAsync')
+const ExpressError = require('./utils/ExpressError')
 
 
 mongoose.set('strictQuery', true);
@@ -36,6 +37,7 @@ app.get('/campgrounds', catchAsync(async (req, res) => {
 }))
 
 app.post('/campgrounds', catchAsync(async (req, res) => {
+    if (!req.body.Campground) throw new ExpressError('Invalid Campground Data', 400)
     const campground = new Campground(req.body.campground)
     await campground.save()
     res.redirect(`/campgrounds/${campground._id}`)
@@ -69,8 +71,15 @@ app.delete('/campgrounds/:id', catchAsync(async (req, res) => {
     res.redirect('/campgrounds')
 }))
 
+//모든 요청을 위함
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page not Found', 404))
+})
+
 app.use((err, req, res, next) => {
-    res.send('Something went wrong...')
+    const { statusCode = 500, message = 'Something went wrong...' } = err;
+    if(!err.message) err.message = 'Something went wrong...'
+    res.status(statusCode).render('error', { err })
 })
 
 app.listen(3000, () => {
