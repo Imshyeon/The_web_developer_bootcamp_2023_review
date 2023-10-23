@@ -1,0 +1,15 @@
+{
+  "name": "mongodb",
+  "version": "1.0.0",
+  "description": "1. SQL(Structured Query Language) : 구조화된 쿼리 언어, 즉 기본적인 구문을 공유하는 관계형 데이터데이스. 2. noSQL : 구조화된 쿼리 언어를 쓰지 않고 많은 요소를 포괄하는 방식. 따로 테이블을 만들어서 따라야 할 스키마와 패턴을 미리 정하지 않아도 된다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^7.6.3"
+  }
+}
