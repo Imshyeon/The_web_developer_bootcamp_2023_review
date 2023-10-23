@@ -593,3 +593,40 @@ animalShelter> db.dogs.find({$or:[{'personality.catFriendly':true}, {age:{$lte:2
 ]
 
 ```
+
+# Mongo Relationship
+
+1. One to Many
+- farm.js
+  ```shell
+  % node farm.js
+  MONGO CONNECTION OPEN
+  {
+    name: 'Full Belly Farms',
+    city: 'Guinda, CA',
+    products: [
+      {
+        name: 'Goddess Melon',
+        price: 4.99,
+        season: 'Summer',
+        _id: new ObjectId("65361d6790a2e6718c564e23"),
+        __v: 0
+      }
+    ],
+    _id: new ObjectId("65361fa7763da116f9211ab1"),
+    __v: 0
+  }
+
+  # ----- 실제 mongodb 내 -----
+
+    relationshopDemo> db.farms.find()
+  [
+    {
+      _id: ObjectId("65361fa7763da116f9211ab1"),
+      name: 'Full Belly Farms',
+      city: 'Guinda, CA',
+      products: [ ObjectId("65361d6790a2e6718c564e23") ],
+      __v: 0
+    }
+  ]
+  ```
