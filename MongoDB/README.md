@@ -599,6 +599,8 @@ animalShelter> db.dogs.find({$or:[{'personality.catFriendly':true}, {age:{$lte:2
 1. One to Many
 - farm.js
   ```shell
+  # 예제 1
+
   % node farm.js
   MONGO CONNECTION OPEN
   {
@@ -627,6 +629,37 @@ animalShelter> db.dogs.find({$or:[{'personality.catFriendly':true}, {age:{$lte:2
       city: 'Guinda, CA',
       products: [ ObjectId("65361d6790a2e6718c564e23") ],
       __v: 0
+    }
+  ]
+
+  # ==================================
+  # 예제 2
+  % node farm.js
+  MONGO CONNECTION OPEN
+  {
+    _id: new ObjectId("65361fa7763da116f9211ab1"),
+    name: 'Full Belly Farms',
+    city: 'Guinda, CA',
+    products: [
+      new ObjectId("65361d6790a2e6718c564e23"),
+      new ObjectId("65361d6790a2e6718c564e24")
+    ],
+    __v: 1
+  }
+
+    # ----- 실제 mongodb 내 -----
+
+  relationshopDemo> db.farms.find()
+  [
+    {
+      _id: ObjectId("65361fa7763da116f9211ab1"),
+      name: 'Full Belly Farms',
+      city: 'Guinda, CA',
+      products: [
+        ObjectId("65361d6790a2e6718c564e23"),
+        ObjectId("65361d6790a2e6718c564e24")
+      ],
+      __v: 1
     }
   ]
   ```

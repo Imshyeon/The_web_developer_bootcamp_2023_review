@@ -35,17 +35,19 @@ const Farm = mongoose.model('Farm', farmSchema)
 //     {name:'Asparagus', price:3.99, season:'Spring'},
 // ])
 
-const makeFarm = async () => {
-    const farm = new Farm({
-        name: 'Full Belly Farms',
-        city: 'Guinda, CA'
-    })
-    const melon = await Product.findOne({ name: 'Goddess Melon' })
-    farm.products.push(melon)
-    await farm.save()
-    console.log(farm)
-}
-makeFarm()
+// ========== 예제 1 ==========
+
+// const makeFarm = async () => {
+//     const farm = new Farm({
+//         name: 'Full Belly Farms',
+//         city: 'Guinda, CA'
+//     })
+//     const melon = await Product.findOne({ name: 'Goddess Melon' })
+//     farm.products.push(melon)
+//     await farm.save()
+//     console.log(farm)
+// }
+// makeFarm()
 
 // db.farms.find()
 // relationshopDemo> db.farms.find()
@@ -58,3 +60,14 @@ makeFarm()
 //     __v: 0
 //   }
 // ]
+
+// ========== 예제 2 ==========
+
+const addProduct = async () => {
+    const farm = await Farm.findOne({name: 'Full Belly Farms'})
+    const watermelon = await Product.findOne({name: 'Sugar Baby Watermelon'})
+    farm.products.push(watermelon)
+    await farm.save()
+    console.log(farm)
+}
+addProduct()
