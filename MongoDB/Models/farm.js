@@ -62,7 +62,6 @@ const Farm = mongoose.model('Farm', farmSchema)
 // ]
 
 // ========== 예제 2 ==========
-
 const addProduct = async () => {
     const farm = await Farm.findOne({name: 'Full Belly Farms'})
     const watermelon = await Product.findOne({name: 'Sugar Baby Watermelon'})
@@ -72,6 +71,8 @@ const addProduct = async () => {
 }
 // addProduct()
 
+
+// ========== populate ========== 
 Farm.findOne({name:'Full Belly Farms'})
     .populate('products')
     .then(farm => console.log(farm))
