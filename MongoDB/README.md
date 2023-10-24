@@ -663,3 +663,52 @@ animalShelter> db.dogs.find({$or:[{'personality.catFriendly':true}, {age:{$lte:2
     }
   ]
   ```
+
+# Mongo Populate(끼워넣기)
+```shell
+# 끼워넣기 전
+% node farm.js
+MONGO CONNECTION OPEN
+{
+  _id: new ObjectId("65361fa7763da116f9211ab1"),
+  name: 'Full Belly Farms',
+  city: 'Guinda, CA',
+  products: [
+    new ObjectId("65361d6790a2e6718c564e23"),
+    new ObjectId("65361d6790a2e6718c564e24")
+  ],
+  __v: 1
+}
+
+#=============== farm.js ===============
+Farm.findOne({name:'Full Belly Farms'})
+    .populate('products')
+    .then(farm => console.log(farm))
+#=======================================
+
+# 끼워넣기 후
+% node farm.js
+MONGO CONNECTION OPEN
+{
+  _id: new ObjectId("65361fa7763da116f9211ab1"),
+  name: 'Full Belly Farms',
+  city: 'Guinda, CA',
+  products: [
+    {
+      _id: new ObjectId("65361d6790a2e6718c564e23"),
+      name: 'Goddess Melon',
+      price: 4.99,
+      season: 'Summer',
+      __v: 0
+    },
+    {
+      _id: new ObjectId("65361d6790a2e6718c564e24"),
+      name: 'Sugar Baby Watermelon',
+      price: 5.99,
+      season: 'Summer',
+      __v: 0
+    }
+  ],
+  __v: 1
+}
+```
