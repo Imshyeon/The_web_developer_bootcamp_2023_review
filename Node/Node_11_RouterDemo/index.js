@@ -4,13 +4,20 @@ const shelterRoutes = require('./routes/shelters')
 const dogsRoutes = require('./routes/dogs')
 const adminRoutes = require('./routes/admin')
 
+// npm i cookie-parser
+const cookieParser = require('cookie-parser')
+
 app.use('/shelters', shelterRoutes)
 app.use('/dogs', dogsRoutes)
 app.use('/admin', adminRoutes)
 
+app.use(cookieParser())
+
 //==========cookie==========
 app.get('/greet', (req, res) => {
-    res.send('hey there')
+    // console.log(req.cookies)
+    const { name = "No-name" } = req.cookies
+    res.send(`hey there ${name}`)
 })
 
 app.get('/setname', (req, res) => {
